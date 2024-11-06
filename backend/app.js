@@ -3,12 +3,26 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const { graphqlHTTP } = require('express-graphql');
+
+const { ApolloServer } = require('@apollo/server');
+const { startStandaloneServer } = require('@apollo/server/standalone');
+
+// Schemas
+const userDefs = require("./graphql/schemas/userSchema");
+
+// Resolvers
+const userResolver = require("./graphql/resolvers/userResolver");
+
 const mongoose = require("mongoose");
 require('dotenv').config();
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+
+const apolloServer = new ApolloServer({
+  typeDefs: userDefs,  
+  resolvers: userResolver,  
+});
 
 var app = express();
 
@@ -37,21 +51,20 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-// Tells your app to handle all request to graphql using graphqlHTTP middleware
-// app.use('/graphql', graphqlHTTP({
-//   schema,
-//   graphiql: true, // Enables GraphiQL interface for testing queries
-// }));
+// Server will start on 3001 port 
+async function startServer(){
+  const { url } = await startStandaloneServer(apolloServer, {
+    listen: { port: 3001 }, // You can specify the port here as needed
+  });
+}
 
-// const dev_db_url = process.env.DEV_DB_URL;
-const mongoDB = process.env.DEV_DB_URL;
-
-mongoose.connect(mongoDB)
-  .then(() => console.log('MongoDB connected'))
+mongoose.connect(process.env.DEV_DB_URL)
+  // Connect to db then start the server
+  .then(() => {
+    console.log('MongoDB connected') 
+    startServer();
+  })
   .catch(err => console.error('MongoDB connection error:', err));
 
-const port = process.env.PORT || 3001; // Use the port specified in environment variable or default to 3000
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
-});
+
 module.exports = app;

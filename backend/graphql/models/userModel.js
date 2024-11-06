@@ -8,4 +8,4 @@ const userSchema = new Schema({
     role: { type: String, required: true, default: "user", enum: ["admin", "user"]}
 })
 
-modules.exports = mongoose.model("User", userSchema); 
+module.exports = mongoose.model("User", userSchema); 

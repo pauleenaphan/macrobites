@@ -1,1 +1,3 @@
-Schemas: Holds all type definitions of our graphql
+Schemas: Holds all type definitions and function names of our graphql
+Resolvers: Holds all function defs and mutations for our definitions
+Models: Mongoose schemas to put in our db
