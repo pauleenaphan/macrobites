@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const recipeSchema = new Recipe({
+const recipeSchema = new Schema({
     name: { type: String, required: true },
     body: { type: String, required: true },
     coverPhoto: { type: String },
