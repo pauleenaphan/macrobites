@@ -16,4 +16,4 @@ const recipeSchema = new Schema({
     images: { type: [String] }
 })
 
-modules.exports = mongoose.model("Recipe", recipeSchema);
+module.exports = mongoose.model("Recipe", recipeSchema);

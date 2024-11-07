@@ -1,24 +1,26 @@
 const { gql } = require('apollo-server');
 
 const recipeDefs = gql`
+    type Macros{
+        protein: Int,
+        fat: Int,
+        carbs: Int,
+        calories: Int
+    }
+
     type Recipe{
         name: String,
         body: String,
         coverPhoto: String,
-        macros: {
-            protein: Number,
-            fat: Number,
-            carbs: Number,
-            calories: Number
-        },
+        macros: Macros,
         readTime: String,
-        cookTime: String, 
+        cookTime: String,
         images: String
     }
 
     type Query{
         getRecipe(id: ID!) : Recipe
-        getAllRecipes(id: ID!) : Recipe
+        getAllRecipes: [Recipe]
     }
 
     type Mutation{
@@ -27,35 +29,33 @@ const recipeDefs = gql`
         deleteRecipe(id: ID!) : Recipe
     }
 
+    input MacrosInput{
+        protein: Int!
+        fat: Int!
+        carbs: Int!
+        calories: Int!
+    }
+
     input CreateRecipeInput{
-        name: String!,
-        body: String!,
-        coverPhoto: String,
-        macros: {
-            protein: Number!,
-            fat: Number!,
-            carbs: Number!,
-            calories: Number!
-        },
-        readTime: String!,
-        cookTime: String!, 
+        name: String!
+        body: String!
+        coverPhoto: String
+        macros: MacrosInput!
+        readTime: String!
+        cookTime: String!
         images: String
     }
 
     input EditRecipeInput{
-        name: String,
-        body: String,
-        coverPhoto: String,
-        macros: {
-            protein: Number,
-            fat: Number,
-            carbs: Number,
-            calories: Number
-        },
-        readTime: String,
-        cookTime: String, 
+        id: ID!
+        name: String
+        body: String
+        coverPhoto: String
+        macros: MacrosInput
+        readTime: String
+        cookTime: String
         images: String
-    }
+    } 
 `
 
 module.exports = recipeDefs;

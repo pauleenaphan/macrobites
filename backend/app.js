@@ -9,9 +9,11 @@ const { startStandaloneServer } = require('@apollo/server/standalone');
 
 // Schemas
 const userDefs = require("./graphql/schemas/userSchema");
+const recipeDefs = require("./graphql/schemas/recipeSchema");
 
 // Resolvers
 const userResolver = require("./graphql/resolvers/userResolver");
+const recipeResolver = require("./graphql/resolvers/recipeResolver");
 
 const mongoose = require("mongoose");
 require('dotenv').config();
@@ -20,8 +22,8 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
 const apolloServer = new ApolloServer({
-  typeDefs: userDefs,  
-  resolvers: userResolver,  
+  typeDefs: [userDefs, recipeDefs],
+  resolvers: [userResolver, recipeResolver]
 });
 
 var app = express();
