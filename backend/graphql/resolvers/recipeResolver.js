@@ -37,6 +37,7 @@ const recipeResolver = {
                         carbs: input.macros.carbs,
                         calories: input.macros.calories
                     },
+                    type: input.type,
                     readTime: input.readTime,
                     cookTime: input.cookTime,
                     images: input.images
@@ -72,6 +73,7 @@ const recipeResolver = {
                 if (input.readTime) recipe.readTime = input.readTime;
                 if (input.cookTime) recipe.cookTime = input.cookTime;
                 if (input.images) recipe.images = input.images;
+                if (input.type) recipe.type = input.type;
                 
                 await recipe.save();
                 return recipe;

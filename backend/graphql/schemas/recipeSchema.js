@@ -15,7 +15,8 @@ const recipeDefs = gql`
         macros: Macros,
         readTime: String,
         cookTime: String,
-        images: String
+        images: String,
+        type: String
     }
 
     type Query{
@@ -44,6 +45,7 @@ const recipeDefs = gql`
         readTime: String!
         cookTime: String!
         images: String
+        type: String!
     }
 
     input EditRecipeInput{
@@ -55,6 +57,7 @@ const recipeDefs = gql`
         readTime: String
         cookTime: String
         images: String
+        type: String
     } 
 `
 
