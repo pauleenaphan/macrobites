@@ -1,4 +1,5 @@
 export const Home = () =>{
+
     return(
         <section className="homePage">
             <h1> Featured Recipes </h1>
