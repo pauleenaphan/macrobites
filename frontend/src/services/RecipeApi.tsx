@@ -22,6 +22,7 @@ export const GET_RECIPES = gql`
 export const GET_ALL_RECIPES = gql`
     query getAllRecipes{
         getAllRecipes {
+            _id
             readTime
             name
             macros {

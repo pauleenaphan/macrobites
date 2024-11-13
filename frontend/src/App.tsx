@@ -20,7 +20,7 @@ function App() {
           <Route path="/" element={<Home/>}/>
           <Route path="/About" element={<About/>}/>
           <Route path="/AllRecipes" element={<AllRecipes/>}/>
-          <Route path="/Recipe" element={<Recipe/>}/>
+          <Route path="/Recipe/:recipeId" element={<Recipe/>}/>
         </Routes>
       </BrowserRouter>
     </ApolloProvider>
