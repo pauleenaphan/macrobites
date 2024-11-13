@@ -11,7 +11,7 @@ const recipeSchema = new Schema({
         carbs: Number,
         calories: Number
     },
-    type: { type: String, required: true, emun: ["breakfast", "lunch", "dinner", "desert"]},
+    type: { type: String, required: true, emun: ["breakfast", "lunch", "dinner", "dessert"]},
     readTime: { type: String, required: true },
     cookTime: { type: String, required: true },
     images: { type: [String] }

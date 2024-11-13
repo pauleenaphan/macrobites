@@ -9,6 +9,7 @@ const recipeDefs = gql`
     }
 
     type Recipe{
+        _id: ID,
         name: String,
         body: String,
         coverPhoto: String,
