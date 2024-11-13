@@ -7,6 +7,7 @@ import { client } from "./services/apolloClient";
 import { Nav } from './components/Nav';
 import { Home } from './pages/Home';
 import { About } from "./pages/About";
+import { Profile } from "./pages/Profile";
 import { AllRecipes } from "./pages/AllRecipes";
 import { Recipe } from "./pages/Recipe";
 
@@ -19,6 +20,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/About" element={<About/>}/>
+          <Route path="/Profile" element={<Profile/>}/>
           <Route path="/AllRecipes" element={<AllRecipes/>}/>
           <Route path="/Recipe/:recipeId" element={<Recipe/>}/>
         </Routes>

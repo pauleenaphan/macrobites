@@ -4,9 +4,12 @@ import { useNavigate } from 'react-router-dom';
 
 import { GET_ALL_RECIPES } from "../services/RecipeApi";
 import { Recipe } from "../types/recipe";
+import { RecipeModal } from '../components/RecipeModal';
 
 export const AllRecipes = () => {
     const navigate = useNavigate();
+    const [newRecipeModal, setNewRecipeModal] = useState(false);
+
     const { data: allRecipesData, loading, error } = useQuery(GET_ALL_RECIPES);
     
     // State to store the selected recipe type
@@ -14,6 +17,10 @@ export const AllRecipes = () => {
 
     if (loading) return <p>Loading recipes...</p>;
     if (error) return <p>Error loading recipes: {error.message}</p>;
+
+    const toggleRecipeModal = () => {
+        setNewRecipeModal(!newRecipeModal);
+    };
 
     // Filter the recipes based on the selected type
     const filteredRecipes = selectedType
@@ -25,6 +32,7 @@ export const AllRecipes = () => {
     return (
         <section className="allRecipes">
             <p> Showing {filteredRecipes.length} recipes </p>
+            <button onClick={toggleRecipeModal}> Add New Recipe </button>
             
             <section className="recipeType">
                 <button onClick={() => setSelectedType('Breakfast')}> Breakfast </button>
@@ -44,6 +52,12 @@ export const AllRecipes = () => {
                     </div>
                 ))}
             </section>
+            <RecipeModal
+                isOpen={newRecipeModal}
+                onClose={() => toggleRecipeModal()}
+                mode= "add"
+            />
+
         </section>
     );
 };

@@ -17,9 +17,8 @@ export const Nav = () =>{
                         <button onClick={() =>{ navigate("/About") }}> About </button>
                         <button onClick={() =>{ navigate("/AllRecipes") }}> Recipes </button>
                     </nav>
-                    <FaUser id="userIcon"></FaUser>
+                    <FaUser id="userIcon" onClick={() =>{ navigate("/Profile")}}></FaUser>
                 </div>
-                
             </header>
         </section>
     )
