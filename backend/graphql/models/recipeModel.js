@@ -14,7 +14,7 @@ const recipeSchema = new Schema({
     type: { type: String, required: true, emun: ["breakfast", "lunch", "dinner", "dessert"]},
     readTime: { type: String, required: true },
     cookTime: { type: String, required: true },
-    images: { type: [String] }
+    images: { type: String }
 })
 
 module.exports = mongoose.model("Recipe", recipeSchema);

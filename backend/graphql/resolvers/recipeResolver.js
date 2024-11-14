@@ -52,7 +52,7 @@ const recipeResolver = {
 
         editRecipe: async(_, { input }) =>{
             try{
-                const recipe = await Recipe.findById(input.id);
+                const recipe = await Recipe.findById(input._id);
                 
                 if(!recipe){
                     throw new Error("recipe not found");
@@ -78,7 +78,8 @@ const recipeResolver = {
                 await recipe.save();
                 return recipe;
             }catch(error){
-                throw new Error("Failed to update recipe");
+                console.error("Failed to update recipe:", error);  
+                throw new Error("Failed to update recipe");   
             }
         },
 

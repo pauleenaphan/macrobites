@@ -8,7 +8,9 @@ import { RecipeModal } from '../components/RecipeModal';
 
 export const AllRecipes = () => {
     const navigate = useNavigate();
-    const [newRecipeModal, setNewRecipeModal] = useState(false);
+    const [recipeModal, setrecipeModal] = useState(false);
+    const [recipeMode, setRecipeMode] = useState<string>("")
+    const [recipeId, setRecipeId] = useState<string>("")
 
     const { data: allRecipesData, loading, error } = useQuery(GET_ALL_RECIPES);
     
@@ -19,7 +21,7 @@ export const AllRecipes = () => {
     if (error) return <p>Error loading recipes: {error.message}</p>;
 
     const toggleRecipeModal = () => {
-        setNewRecipeModal(!newRecipeModal);
+        setrecipeModal(!recipeModal);
     };
 
     // Filter the recipes based on the selected type
@@ -32,7 +34,10 @@ export const AllRecipes = () => {
     return (
         <section className="allRecipes">
             <p> Showing {filteredRecipes.length} recipes </p>
-            <button onClick={toggleRecipeModal}> Add New Recipe </button>
+            <button onClick={() =>{ 
+                toggleRecipeModal()
+                setRecipeMode("add")
+            }}> Add New Recipe </button>
             
             <section className="recipeType">
                 <button onClick={() => setSelectedType('Breakfast')}> Breakfast </button>
@@ -44,18 +49,27 @@ export const AllRecipes = () => {
 
             <section className="allRecipes">
                 {filteredRecipes.map((recipe: Recipe) => (
-                    <div key={recipe._id} onClick={() => navigate(`/Recipe/${recipe._id}`)}>
-                        <h2> {recipe.name} </h2>
-                        <p> {recipe.body} </p>
-                        <p> {recipe.macros.protein}</p>
-                        <p> {recipe.type} </p>
+                    <div key={recipe._id}>
+                        <div className="recipe" onClick={() => navigate(`/Recipe/${recipe._id}`)}>
+                            <h2> {recipe.name} </h2>
+                            <p> {recipe.body} </p>
+                            <p> {recipe.macros.protein}</p>
+                            <p> {recipe.type} </p>
+                        </div>
+                        <button onClick={() =>{
+                            toggleRecipeModal()
+                            setRecipeMode("edit");
+                            setRecipeId(recipe._id)
+                        }}    
+                        > Edit </button>
                     </div>
                 ))}
             </section>
             <RecipeModal
-                isOpen={newRecipeModal}
+                isOpen={recipeModal}
                 onClose={() => toggleRecipeModal()}
-                mode= "add"
+                mode={recipeMode}
+                recipeId={recipeId}
             />
 
         </section>

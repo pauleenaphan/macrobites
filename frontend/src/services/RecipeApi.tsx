@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 //! Queries
-export const GET_RECIPES = gql`
+export const GET_RECIPE = gql`
     query getRecipe($id: ID!){
         getRecipe(id: $id){
             readTime
@@ -60,4 +60,25 @@ export const ADD_RECIPE = gql`
         }
     }
     
+`
+
+export const EDIT_RECIPE = gql`
+    mutation editRecipe($input: EditRecipeInput!){
+        editRecipe(input: $input){
+            _id
+            name
+            body
+            coverPhoto
+            macros{
+                protein
+                fat
+                carbs
+                calories
+            }
+            type
+            readTime
+            cookTime
+            images
+        }
+    }
 `

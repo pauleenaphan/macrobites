@@ -1,12 +1,12 @@
 import { useParams } from 'react-router-dom';
-import { GET_RECIPES } from '../services/RecipeApi';
+import { GET_RECIPE } from '../services/RecipeApi';
 import { useQuery } from '@apollo/client';
 
 export const Recipe = () =>{
     const { recipeId } = useParams<{ recipeId: string }>();
     console.log("recipeId", recipeId);
 
-    const { data: recipeData, loading, error } = useQuery(GET_RECIPES, {
+    const { data: recipeData, loading, error } = useQuery(GET_RECIPE, {
         variables: { id: recipeId }
     })
 

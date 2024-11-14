@@ -41,16 +41,16 @@ const recipeDefs = gql`
     input CreateRecipeInput{
         name: String!
         body: String!
-        coverPhoto: String
+        coverPhoto: String!
         macros: MacrosInput!
         readTime: String!
         cookTime: String!
-        images: String
+        images: String!
         type: String!
     }
 
     input EditRecipeInput{
-        id: ID!
+        _id: ID!
         name: String
         body: String
         coverPhoto: String

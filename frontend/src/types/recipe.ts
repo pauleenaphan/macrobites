@@ -18,16 +18,6 @@ export interface Recipe {
 export interface RecipeModalProps {
     isOpen: boolean;
     onClose: () => void;
-    mode: 'add' | 'edit';  // The mode can either be 'add' or 'edit'
-    initialData?: {
-        name: string;
-        body: string;
-        protein: number;
-        fat: number;
-        carbs: number;
-        calories: number;
-        type: string;
-        readTime: string;
-        cookTime: string;
-    };
+    mode: string;  // The mode can either be 'add' or 'edit'
+    recipeId: string | null;
 }
